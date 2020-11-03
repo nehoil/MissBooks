@@ -1,20 +1,24 @@
 
-import bookApp from './pages/book-app.cmp.js'
-import bookDetails from './pages/book-details.cmp.js'
-import homePage from './pages/home-page.cmp.js'
+import bookApp from './pages/book-app.cmp.js';
+import bookDetails from './pages/book-details.cmp.js';
+import homePage from './pages/home-page.cmp.js';
+import { aboutPage, aboutServicesPage, aboutTeamPage } from './pages/about-us.cmp.js';
 
-const aboutUs = {
-    template:`
-    <section>
-        <h1>about us...</h1>
-    </section>
-    `
-}
 
 const myRoutes = [
     {
         path: '/about',
-        component: aboutUs
+        component: aboutPage,
+        children: [
+            {
+                path: 'services',
+                component: aboutServicesPage
+            },
+            {
+                path: 'team',
+                component: aboutTeamPage
+            },
+        ]
     },
     {
         path: '/',

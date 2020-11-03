@@ -4,9 +4,8 @@ import bookReviews from '../cmps/book/book-reviews.cmp.js';
 import { bookService } from '../services/book-service.js'
 
 export default {
+    name: 'book-details',
     template: `
-                    <transition appear>
-
         <section class="book-details" v-if="book">
            <h4>Book Details</h4>
            <div class="book-img">
@@ -39,30 +38,64 @@ export default {
             <div class="reviews-details">
              <ul>
                 <li v-for="currReview in book.reviews" :key="currReview.id">
-                    <book-reviews :review="currReview" @remove="removeReview" />
-                    
+                    <book-reviews :review="currReview" @remove="removeReview" /> 
                 </li>
             </ul>
         </div>
     </div>
     <review-add :bookId="book.id" />
-    
+    <div class="book-details-btns">
+    <button @click="showPrevBook()"><< Previous book</button>
     <button @click="goBack()">Go Back</button>
+    <button @click="showNextBook()">Next Book >></button>
+    </div>
 </section>
-</transition>
     `,
     data() {
         return {
-            book: null
+            book: null,
+            bookIdx: null,
+            firstClick: true
         }
     },
     methods: {
         goBack() {
             this.$router.push('/book')
         },
-        removeReview(reviewId){
-            bookService.removeReview(reviewId,this.book.id)
-
+        removeReview(reviewId) {
+            bookService.removeReview(reviewId, this.book.id)
+        },
+        showNextBook() {
+            var nextId = this.bookIdx++
+            if (this.firstClick) nextId++
+            bookService.getByIdx(nextId)
+            .then(book => {
+                if (!book) return
+                this.$router.push(book.id)
+            })            
+            this.firstClick = false
+        },
+        loadBook(id) {
+            bookService.getById(id)
+                .then(book => {
+                    this.book = book
+                })
+        },
+        showPrevBook() {
+            var nextId = this.bookIdx--
+            if (this.firstClick) nextId--
+            bookService.getByIdx(nextId)
+                .then(book => {
+                    if (!book) return
+                    this.$router.push(book.id)
+                })
+            this.firstClick = false
+        },
+        loadBook(id) {
+            bookService.getById(id)
+                .then(book => {
+                    this.book = book
+                })
         }
     },
     computed: {
@@ -90,21 +123,25 @@ export default {
             return (this.book.listPrice.isOnSale)
         },
         totalScore() {
-        var sum = 0;
-        for (var currReview of this.book.reviews) {
-            sum += currReview.rating
-          }          
-          return sum/this.book.reviews.length;
+            var sum = 0;
+            for (var currReview of this.book.reviews) {
+                sum += currReview.rating
+            }
+            return sum / this.book.reviews.length;
+        }
+    },
+    watch: {
+        '$route.params.bookId'(to, from) {
+            // console.log('changed!', to);
+            this.loadBook(to)
         }
     },
     created() {
         const id = this.$route.params.bookId;
         bookService.getById(id)
             .then(book => this.book = book)
-            // .then(()=>{
-            //     console.log(this.book.reviews);
-            //     bookService.addReviews(this.book)
-            // })
+        bookService.getIdxById(id)
+            .then(idx => this.bookIdx = idx)
     },
     components: {
         longText,

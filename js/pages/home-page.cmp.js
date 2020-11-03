@@ -2,7 +2,11 @@
 export default {
     template: `
         <section class="book-app">
-            <h1>Welcome to Bookify!</h1>
+            <section class="home-page-header">
+                <div class="home-page-header-container">
+                    <h1>Welcome to Bookify!</h1>
+                 </div>
+            </section>
         </section>
     `
 }

@@ -3,7 +3,8 @@ export default {
             <section class="book-filter">
             <div class="filter-title">
                     <h2>Filter by</h2>
-                </div>
+                </div> 
+                
                 <span class="filter-search-input">
                     <form @submit.prevent="emitFilter">
                    Title <input type="text" v-model="filterBy.byTitle" placeholder="Search here"/>

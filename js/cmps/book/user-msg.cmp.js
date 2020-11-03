@@ -18,6 +18,6 @@ export default {
         eventBus.$on('show-msg', msg => this.msg = msg)
         setInterval(() => {
             this.msg = null
-        }, 3000);
+        }, 4000);
     }
 }
