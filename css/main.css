@@ -255,7 +255,7 @@ margin: 5px;
 
 /* book-filter  */
 
-.book-filter {
+.book-actions {
     background-image: url('../img/Untitled\ design\ \(34\).png');
     background-size: fit;
     height: 200px;
@@ -264,7 +264,7 @@ margin: 5px;
     padding: 20px;
 }
 
-.main-filter-container {
+.main-actions-container {
     margin: auto;
     max-width: 800px;
     min-width: 700px;
