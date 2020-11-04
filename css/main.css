@@ -368,25 +368,33 @@ ul li .book-preview:hover {
 /* home-page  */
 
 .home-page-header {
-  background-image: url("../img/Untitled\ design\ \(34\).png");
-  background-size: fit;
-  height: 470px;
-  display: flex;
-  justify-content: center;
+  background-image: url("../img/3025.jpg");
+  background-size: contain;
+  height: 400px;
   padding: 20px;
 }
 
 .home-page-header-container {
-  margin: auto;
   max-width: 800px;
   min-width: 700px;
+  font-size: 4rem;
   text-align: center;
   display: flex;
+  font-weight: 1000;
+  color: #ffffff;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: #fff;
-  border: 1px solid rgb(221, 221, 221);
-  border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: center;
+  /* justify-content: space-between; */
+  /* background-color: #fff; */
+  /* border: 1px solid rgb(221, 221, 221); */
+  /* border-radius: 12px; */
+  /* box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px; */
   padding-bottom: 20px;
+}
+
+.home-page-header-container p {
+padding: 0;
+margin: 0;
 }
